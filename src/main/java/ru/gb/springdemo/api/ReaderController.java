@@ -69,7 +69,7 @@ public class ReaderController {
 
         final List<Issue> issues;
         try {
-            issues = issueService.getAllIssues(id);
+            issues = issueService.getAllIssuesForReader(id);
         } catch (NoSuchElementException e) {
             return ResponseEntity.notFound().build();
         }

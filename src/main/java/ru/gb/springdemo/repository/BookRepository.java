@@ -21,9 +21,14 @@ public class BookRepository {
   @PostConstruct
   public void generateData() {
     books.addAll(List.of(
-      new Book("война и мир"),
-      new Book("метрвые души"),
-      new Book("чистый код")
+      new Book("Война и мир"),
+      new Book("Мертвые души"),
+      new Book("Чистый код"),
+      new Book("Декамерон"),
+      new Book("Горе от ума"),
+      new Book("Дракула"),
+      new Book("Капитал"),
+      new Book("Воскресенье")
     ));
   }
 
@@ -47,6 +52,10 @@ public class BookRepository {
   public void delete(Book book) {
 
     books.remove(book);
+  }
+
+  public List<Book> getAllBooks() {
+    return List.copyOf(books);
   }
 
 }

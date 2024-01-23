@@ -6,6 +6,7 @@ import ru.gb.springdemo.api.BookRequest;
 import ru.gb.springdemo.model.Book;
 import ru.gb.springdemo.repository.BookRepository;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 
@@ -40,5 +41,9 @@ public class BookService {
         }
         bookRepository.delete(book);
         return book;
+    }
+
+    public List<Book> allBooks() {
+        return bookRepository.getAllBooks();
     }
 }

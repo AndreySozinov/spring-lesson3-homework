@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.gb.springdemo.model.Issue;
 import ru.gb.springdemo.service.IssueService;
 
+import java.time.LocalDateTime;
 import java.util.NoSuchElementException;
 
 @Slf4j
@@ -18,10 +19,19 @@ public class IssueController {
   @Autowired
   private IssueService service;
 
-//  @PutMapping
-//  public void returnBook(long issueId) {
-//    // найти в репозитории выдачу и проставить ей returned_at
-//  }
+  @PutMapping(path = "/{issueId}")
+  public ResponseEntity<Issue> returnBook(@PathVariable long issueId) {
+    log.info("Возврат книги по выдаче с id = {}", issueId);
+
+    final Issue issue;
+    try {
+      issue = service.returnBook(issueId);
+    } catch (NoSuchElementException e) {
+      return ResponseEntity.notFound().build();
+    }
+    return ResponseEntity.status(HttpStatus.OK).body(issue);
+
+  }
 
   @PostMapping
   public ResponseEntity<Issue> issueBook(@RequestBody IssueRequest request) {

@@ -3,9 +3,11 @@ package ru.gb.springdemo.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.gb.springdemo.api.ReaderRequest;
+import ru.gb.springdemo.model.Book;
 import ru.gb.springdemo.model.Reader;
 import ru.gb.springdemo.repository.ReaderRepository;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -39,5 +41,9 @@ public class ReaderService {
         }
         readerRepository.delete(reader);
         return reader;
+    }
+
+    public List<Reader> allReaders() {
+        return readerRepository.getAllReaders();
     }
 }

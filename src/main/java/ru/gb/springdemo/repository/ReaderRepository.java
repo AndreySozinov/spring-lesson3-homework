@@ -21,7 +21,12 @@ public class ReaderRepository {
   @PostConstruct
   public void generateData() {
     readers.addAll(List.of(
-      new ru.gb.springdemo.model.Reader("Игорь")
+      new ru.gb.springdemo.model.Reader("Игорь Смирнов"),
+      new ru.gb.springdemo.model.Reader("Андрей Иванов"),
+      new ru.gb.springdemo.model.Reader("Вася Петров"),
+      new ru.gb.springdemo.model.Reader("Петя Кузнецов"),
+      new ru.gb.springdemo.model.Reader("Оксана Семенова"),
+      new ru.gb.springdemo.model.Reader("Ирина Новикова")
     ));
   }
 
@@ -45,6 +50,10 @@ public class ReaderRepository {
   public void delete(Reader reader) {
 
     readers.remove(reader);
+  }
+
+  public List<Reader> getAllReaders() {
+    return List.copyOf(readers);
   }
 
 }

@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="ru" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Reader Books</title>
+</head>
+<body>
+<h1><span>List of books holding by reader: </span><span th:text="${reader.getName()}"></span> id:
+    <span th:text="${reader.getId()}"></span></h1><br>
+<ul>
+    <div th:each="book : ${books}">
+        <li><span th:text="${book.getId()}"></span>. <span th:text="${book.getName()}"></span></li>
+    </div>
+</ul>
+</body>
+</html>
