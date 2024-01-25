@@ -1,5 +1,6 @@
 package ru.gb.springdemo.api;
 
+import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,7 @@ import java.util.NoSuchElementException;
 @RestController
 @RequestMapping("/book")
 public class BookController {
+
 
     @Autowired
     private BookService service;
@@ -59,4 +61,14 @@ public class BookController {
 
         return ResponseEntity.status(HttpStatus.OK).body(book);
     }
+
+    // @PostConstruct
+//      bookRepository.save(new Book("Мертвые души"));
+//      bookRepository.save(new Book("Чистый код"));
+//      bookRepository.save(new Book("Декамерон"));
+//      bookRepository.save(new Book("Горе от ума"));
+//      bookRepository.save(new Book("Дракула"));
+//      bookRepository.save(new Book("Капитал"));
+//      bookRepository.save(new Book("Воскресенье"));
+
 }

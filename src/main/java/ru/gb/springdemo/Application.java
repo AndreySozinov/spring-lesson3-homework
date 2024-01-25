@@ -55,6 +55,40 @@ public class Application {
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
+
+//      @PostConstruct
+//    public void generateData() {
+//      bookRepository.save(new Book("Война и мир"));
+//      bookRepository.save(new Book("Мертвые души"));
+//      bookRepository.save(new Book("Чистый код"));
+//      bookRepository.save(new Book("Декамерон"));
+//      bookRepository.save(new Book("Горе от ума"));
+//      bookRepository.save(new Book("Дракула"));
+//      bookRepository.save(new Book("Капитал"));
+//      bookRepository.save(new Book("Воскресенье"));
+//  }
+
+		//      @PostConstruct
+//      public void generateData() {
+//          readerRepository.save(new Reader("Игорь Смирнов"));
+//          readerRepository.save(new Reader("Андрей Иванов"));
+//          readerRepository.save(new Reader("Вася Петров"));
+//          readerRepository.save(new Reader("Петя Кузнецов"));
+//          readerRepository.save(new Reader("Оксана Семенова"));
+//          readerRepository.save(new Reader("Ирина Новикова"));
+//  }
+
+		//      @PostConstruct
+//    public void generateData() {
+//        issueRepository.save(new Issue(5, 2));
+//        issueRepository.save(new Issue(2, 1));
+//        issueRepository.save(new Issue(4, 6));
+//        issueRepository.save(new Issue(8, 1));
+//        issueRepository.save(new Issue(1, 3));
+//        issueRepository.save(new Issue(7, 4));
+//        issueRepository.save(new Issue(3, 5));
+//        issueRepository.save(new Issue(6, 1));
+//    }
 	}
 
 }

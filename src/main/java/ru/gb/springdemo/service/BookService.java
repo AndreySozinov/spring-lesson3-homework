@@ -16,34 +16,27 @@ public class BookService {
     private final BookRepository bookRepository;
 
     public Book create(BookRequest request) {
-        if (bookRepository.getBookByName(request.getName()) != null) {
+        if (bookRepository.findByName(request.getName()) != null) {
             throw new IllegalArgumentException("Книга с таким названием уже есть");
         }
 
         Book book = new Book(request.getName());
-        bookRepository.save(book);
-        return book;
+        return bookRepository.save(book);
     }
 
     public Book readInfo(long id) {
-        Book book = bookRepository.getBookById(id);
-        if (book == null) {
-            throw new NoSuchElementException("Не найдена книга с идентификатором \"" + id + "\"");
-        }
-
-        return book;
+        return bookRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Не найдена книга с идентификатором \"" + id + "\""));
     }
 
     public Book delete(long id) {
-        Book book = bookRepository.getBookById(id);
-        if (book == null) {
-            throw new NoSuchElementException("Не найдена книга с идентификатором \"" + id + "\"");
-        }
-        bookRepository.delete(book);
+        Book book = readInfo(id);
+        bookRepository.deleteById(id);
         return book;
     }
 
     public List<Book> allBooks() {
-        return bookRepository.getAllBooks();
+        return bookRepository.findAll();
     }
+
 }
