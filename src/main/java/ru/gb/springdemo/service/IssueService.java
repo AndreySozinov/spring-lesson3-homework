@@ -57,7 +57,8 @@ public class IssueService {
 
     List<Issue> foundIssues = issueRepository.findAll()
             .stream()
-            .filter(it -> it.getReaderId() == id).toList();
+            .filter(it -> it.getReaderId() == id)
+            .filter(it -> it.getReturned_at() == null).toList();
     if (foundIssues.isEmpty()) {
       throw new NoSuchElementException("Не найдено ни одной выдачи читателю с идентификатором \"" + id + "\"");
     }

@@ -1,10 +1,12 @@
 package ru.gb.springdemo.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDateTime;
@@ -12,27 +14,30 @@ import java.time.LocalDateTime;
 @Table(name = "issues")
 @Data
 @RequiredArgsConstructor
+@NoArgsConstructor(force = true)
+@Schema
 public class Issue {
 
     public static long sequence = 1L;
+
     @Id
+    @Schema(name = "Идентификатор")
     private final long id;
 
     @Column(name = "book_id")
+    @Schema(name = "Идентификатор книги")
     private final long bookId;
 
     @Column(name = "reader_id")
+    @Schema(name = "Идентификатор читателя")
     private final long readerId;
 
-    /**
-     * Дата выдачи
-     */
     @Column(name = "issued_at")
+    @Schema(name = "Дата выдачи")
     private final LocalDateTime issued_at;
-    /**
-     * Дата возврата
-     */
+
     @Column(name = "returned_at")
+    @Schema(name = "Дата возврата")
     private LocalDateTime returned_at;
 
     public Issue(long bookId, long readerId) {

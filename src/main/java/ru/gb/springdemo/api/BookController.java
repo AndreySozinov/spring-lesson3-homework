@@ -1,5 +1,7 @@
 package ru.gb.springdemo.api;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import java.util.NoSuchElementException;
 @Slf4j
 @RestController
 @RequestMapping("/book")
+@Tag(name = "Book")
 public class BookController {
 
 
@@ -21,6 +24,7 @@ public class BookController {
     private BookService service;
 
     @PostMapping
+    @Operation(summary = "add new book", description = "Добавляет новую книгу")
     public ResponseEntity<Book> addBook(@RequestBody BookRequest request) {
         log.info("Получен запрос на добавление новой книги: name = {}", request.getName());
 
@@ -35,6 +39,7 @@ public class BookController {
     }
 
     @GetMapping(path = "/{id}")
+    @Operation(summary = "get book by ID", description = "Загружает книгу из базы данных по ID")
     public ResponseEntity<Book> getBookInfo(@PathVariable long id) {
         log.info("Получен запрос на чтение информации о книге: id = {}", id);
 
@@ -49,6 +54,7 @@ public class BookController {
     }
 
     @DeleteMapping(path = "/{id}")
+    @Operation(summary = "delete book by ID", description = "Удаляет книгу из базы данных по ID")
     public ResponseEntity<Book> deleteBook(@PathVariable long id) {
         log.info("Получен запрос на удаление книги: id = {}", id);
 

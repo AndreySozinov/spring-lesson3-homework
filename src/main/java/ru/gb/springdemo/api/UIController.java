@@ -1,5 +1,7 @@
 package ru.gb.springdemo.api;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +19,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 @Controller()
+@Tag(name = "UI")
 public class UIController {
 
     @Autowired
@@ -27,11 +30,13 @@ public class UIController {
     private IssueService issueService;
 
     @GetMapping("/ui")
+    @Operation(summary = "home page", description = "Домашняя страница")
     public String uiHome() {
         return "home";
     }
 
     @GetMapping("/ui/books")
+    @Operation(summary = "get all books", description = "Загружает все книги в базе данных")
     public String books(Model model) {
         List<Book> bookList = bookService.allBooks();
         model.addAttribute("books", bookList);
@@ -39,6 +44,7 @@ public class UIController {
     }
 
     @GetMapping("/ui/readers")
+    @Operation(summary = "get all readers", description = "Загружает всех читателей в базе данных")
     public String readers(Model model) {
         List<Reader> readerList = readerService.allReaders();
         model.addAttribute("readers", readerList);
@@ -46,6 +52,7 @@ public class UIController {
     }
 
     @GetMapping("/ui/issues")
+    @Operation(summary = "get all issues", description = "Загружает все выдачи книг в базе данных")
     public String issues(Model model) {
         List<Issue> issueList = issueService.AllIssues();
         List<Reader> readerList = readerService.allReaders();
@@ -57,18 +64,19 @@ public class UIController {
     }
 
     @GetMapping("/ui/reader/{id}")
+    @Operation(summary = "get all books by reader", description = "Загружает все книги на руках у читателя")
     public String readerBooks(@PathVariable long id, Model model) {
-        List<Issue> issues;
+        Reader reader;
         try {
-            issues = issueService.getAllIssuesForReader(id);
+            reader = readerService.readInfo(id);
         } catch (NoSuchElementException e) {
             model.addAttribute("message", e.getMessage());
             return "error";
         }
 
-        Reader reader;
+        List<Issue> issues;
         try {
-            reader = readerService.readInfo(id);
+            issues = issueService.getAllIssuesForReader(id);
         } catch (NoSuchElementException e) {
             model.addAttribute("message", e.getMessage());
             return "error";
