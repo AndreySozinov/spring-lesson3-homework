@@ -11,3 +11,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create
+  security:
+    user:
+      name: andrey
+      password: 1234

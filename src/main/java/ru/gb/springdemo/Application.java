@@ -2,6 +2,12 @@ package ru.gb.springdemo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import ru.gb.springdemo.model.User;
+import ru.gb.springdemo.repository.BookRepository;
+import ru.gb.springdemo.repository.IssueRepository;
+import ru.gb.springdemo.repository.ReaderRepository;
+import ru.gb.springdemo.repository.UserRepository;
+
 
 @SpringBootApplication
 public class Application {
@@ -53,8 +59,28 @@ public class Application {
 			spring-web.jar
 	 */
 
+	// SecurityContext (SecurityContextHolder)
+	// SecurityContextHolder = Map<String, SecurityContext>
+	// Authorization <- [Principle (login), List<GrantedAuthority> roles]
+
+	// UserDetails -
+	// UserDetailsService
+	// PasswordEncoder
+
+	// SecurityFilterChain
+
+
+	// Authorization: Basic base64(username+login)
+	// Authorization: Bearer
+
+	static long id = 1L;
+
 	public static void main(String[] args) {
-		SpringApplication.run(Application.class, args);
+		UserRepository userRepository = SpringApplication.run(Application.class, args).getBean(UserRepository.class);
+
+		saveUser(userRepository, "admin");
+		saveUser(userRepository, "reader");
+		saveUser(userRepository, "auth");
 
 //      @PostConstruct
 //    public void generateData() {
@@ -88,7 +114,17 @@ public class Application {
 //        issueRepository.save(new Issue(7, 4));
 //        issueRepository.save(new Issue(3, 5));
 //        issueRepository.save(new Issue(6, 1));
+
 //    }
+	}
+
+	private static void saveUser(UserRepository userRepository, String login) {
+		User user = new User();
+		user.setId(id++);
+		user.setLogin(login);
+		user.setPassword(login);
+		user.setRole(login);
+		userRepository.save(user);
 	}
 
 }
