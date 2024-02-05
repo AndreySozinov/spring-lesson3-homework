@@ -2,7 +2,12 @@ package ru.gb.springdemo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
+import ru.gb.springdemo.aop.Timer;
 import ru.gb.springdemo.model.User;
+import ru.gb.springdemo.model.Book;
+import ru.gb.springdemo.model.Reader;
+import ru.gb.springdemo.model.Issue;
 import ru.gb.springdemo.repository.BookRepository;
 import ru.gb.springdemo.repository.IssueRepository;
 import ru.gb.springdemo.repository.ReaderRepository;
@@ -76,48 +81,44 @@ public class Application {
 	static long id = 1L;
 
 	public static void main(String[] args) {
-		UserRepository userRepository = SpringApplication.run(Application.class, args).getBean(UserRepository.class);
+		ConfigurableApplicationContext context = SpringApplication.run(Application.class, args);
+		UserRepository userRepository = context.getBean(UserRepository.class);
+		BookRepository bookRepository = context.getBean(BookRepository.class);
+		ReaderRepository readerRepository = context.getBean(ReaderRepository.class);
+		IssueRepository issueRepository = context.getBean(IssueRepository.class);
 
 		saveUser(userRepository, "admin");
 		saveUser(userRepository, "reader");
 		saveUser(userRepository, "auth");
 
-//      @PostConstruct
-//    public void generateData() {
-//      bookRepository.save(new Book("Война и мир"));
-//      bookRepository.save(new Book("Мертвые души"));
-//      bookRepository.save(new Book("Чистый код"));
-//      bookRepository.save(new Book("Декамерон"));
-//      bookRepository.save(new Book("Горе от ума"));
-//      bookRepository.save(new Book("Дракула"));
-//      bookRepository.save(new Book("Капитал"));
-//      bookRepository.save(new Book("Воскресенье"));
-//  }
+		bookRepository.save(new Book("Война и мир"));
+      	bookRepository.save(new Book("Мертвые души"));
+      	bookRepository.save(new Book("Чистый код"));
+      	bookRepository.save(new Book("Декамерон"));
+      	bookRepository.save(new Book("Горе от ума"));
+      	bookRepository.save(new Book("Дракула"));
+      	bookRepository.save(new Book("Капитал"));
+      	bookRepository.save(new Book("Воскресенье"));
 
-		//      @PostConstruct
-//      public void generateData() {
-//          readerRepository.save(new Reader("Игорь Смирнов"));
-//          readerRepository.save(new Reader("Андрей Иванов"));
-//          readerRepository.save(new Reader("Вася Петров"));
-//          readerRepository.save(new Reader("Петя Кузнецов"));
-//          readerRepository.save(new Reader("Оксана Семенова"));
-//          readerRepository.save(new Reader("Ирина Новикова"));
-//  }
+		readerRepository.save(new Reader("Игорь Смирнов"));
+        readerRepository.save(new Reader("Андрей Иванов"));
+        readerRepository.save(new Reader("Вася Петров"));
+        readerRepository.save(new Reader("Петя Кузнецов"));
+        readerRepository.save(new Reader("Оксана Семенова"));
+        readerRepository.save(new Reader("Ирина Новикова"));
 
-		//      @PostConstruct
-//    public void generateData() {
-//        issueRepository.save(new Issue(5, 2));
-//        issueRepository.save(new Issue(2, 1));
-//        issueRepository.save(new Issue(4, 6));
-//        issueRepository.save(new Issue(8, 1));
-//        issueRepository.save(new Issue(1, 3));
-//        issueRepository.save(new Issue(7, 4));
-//        issueRepository.save(new Issue(3, 5));
-//        issueRepository.save(new Issue(6, 1));
+        issueRepository.save(new Issue(5, 2));
+        issueRepository.save(new Issue(2, 1));
+        issueRepository.save(new Issue(4, 6));
+        issueRepository.save(new Issue(8, 1));
+        issueRepository.save(new Issue(1, 3));
+        issueRepository.save(new Issue(7, 4));
+        issueRepository.save(new Issue(3, 5));
+        issueRepository.save(new Issue(6, 1));
 
-//    }
 	}
 
+	@Timer
 	private static void saveUser(UserRepository userRepository, String login) {
 		User user = new User();
 		user.setId(id++);
