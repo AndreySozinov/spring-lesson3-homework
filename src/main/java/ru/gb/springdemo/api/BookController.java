@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.gb.springdemo.model.Book;
 import ru.gb.springdemo.service.BookService;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Slf4j
@@ -38,6 +39,21 @@ public class BookController {
         return ResponseEntity.status(HttpStatus.CREATED).body(book);
     }
 
+    @GetMapping(path = "/all")
+    @Operation(summary = "get all books list", description = "Загружает список всех книг из БД")
+    public ResponseEntity<List<Book>> getAllBooks() {
+        log.info("Получен запрос на чтение информации о всех книгах в БД");
+
+        final List<Book> books;
+        try {
+            books = service.allBooks();
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body(books);
+    }
+
     @GetMapping(path = "/{id}")
     @Operation(summary = "get book by ID", description = "Загружает книгу из базы данных по ID")
     public ResponseEntity<Book> getBookInfo(@PathVariable long id) {
@@ -47,7 +63,7 @@ public class BookController {
         try {
             book = service.readInfo(id);
         } catch (NoSuchElementException e) {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
 
         return ResponseEntity.status(HttpStatus.OK).body(book);

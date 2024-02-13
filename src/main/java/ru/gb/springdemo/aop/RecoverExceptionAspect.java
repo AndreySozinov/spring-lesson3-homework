@@ -10,11 +10,11 @@ import org.springframework.stereotype.Component;
 //@Aspect
 //@Component
 //public class RecoverExceptionAspect {
-////    @Pointcut("within(ru.gb.springdemo.*)")
-////    public void classAnnotatedWith() {
-////
-////    }
+//    @Pointcut("within(ru.gb.springdemo.*)")
+//    public void classAnnotatedWith() {
 //
+//    }
+
 //    @Pointcut("@annotation(ru.gb.springdemo.aop.RecoverException)")
 //    public void methodsAnnotatedWith() {
 //
@@ -22,7 +22,7 @@ import org.springframework.stereotype.Component;
 //
 //    @AfterThrowing(value = "methodsAnnotatedWith()", throwing = "exception")
 //    public Object recover(Exception exception) throws Throwable {
-//        if (exception instanceof (RecoverException.class.getField)) {
+//        if (exception.getClass() instanceof (RecoverException.class.getAnnotation(n))) {
 //            throw exception;
 //        } else {
 //            return null;
@@ -30,4 +30,4 @@ import org.springframework.stereotype.Component;
 //
 //    }
 //}
-// RuntimeException.class.isAssignableFrom(IllegalArgumentException.class)
+ // RuntimeException.class.isAssignableFrom(IllegalArgumentException.class)

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.gb.springdemo.model.Book;
 import ru.gb.springdemo.model.Issue;
 import ru.gb.springdemo.model.Reader;
 import ru.gb.springdemo.service.IssueService;
@@ -38,6 +39,21 @@ public class ReaderController {
         }
 
         return ResponseEntity.status(HttpStatus.CREATED).body(reader);
+    }
+
+    @GetMapping(path = "/all")
+    @Operation(summary = "get all readers list", description = "Загружает список всех читателей из БД")
+    public ResponseEntity<List<Reader>> getAllReaders() {
+        log.info("Получен запрос на чтение информации о всех читателях в БД");
+
+        final List<Reader> readers;
+        try {
+            readers = service.allReaders();
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body(readers);
     }
 
     @GetMapping(path = "/{id}")

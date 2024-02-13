@@ -12,19 +12,19 @@ import ru.gb.springdemo.repository.UserRepository;
 
 import java.util.List;
 
-@Component
-@RequiredArgsConstructor
-public class CustomUserDetailsService implements UserDetailsService {
-
-    @Autowired
-    private final UserRepository userRepository;
-
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByLogin(username)
-                .orElseThrow(() -> new UsernameNotFoundException(username));
-        return new org.springframework.security.core.userdetails.User(user.getLogin(),
-                user.getPassword(), List.of(new SimpleGrantedAuthority(user.getRole())));
-    }
-}
+//@Component
+//@RequiredArgsConstructor
+//public class CustomUserDetailsService implements UserDetailsService {
+//
+//    @Autowired
+//    private final UserRepository userRepository;
+//
+//
+//    @Override
+//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//        User user = userRepository.findByLogin(username)
+//                .orElseThrow(() -> new UsernameNotFoundException(username));
+//        return new org.springframework.security.core.userdetails.User(user.getLogin(),
+//                user.getPassword(), List.of(new SimpleGrantedAuthority(user.getRole())));
+//    }
+//}

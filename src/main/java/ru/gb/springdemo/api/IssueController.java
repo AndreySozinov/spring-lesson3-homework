@@ -50,7 +50,7 @@ public class IssueController {
       return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
     }
 
-    return ResponseEntity.status(HttpStatus.OK).body(issue);
+    return ResponseEntity.status(HttpStatus.CREATED).body(issue);
   }
 
   @GetMapping(path = "/{id}")

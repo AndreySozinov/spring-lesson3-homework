@@ -36,7 +36,7 @@ public class UIController {
         return "home";
     }
 
-    @Timer
+//    @Timer
     @GetMapping("/ui/books")
     @Operation(summary = "get all books", description = "Загружает все книги в базе данных")
     public String books(Model model) {

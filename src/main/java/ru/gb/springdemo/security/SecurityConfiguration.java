@@ -13,40 +13,40 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@Configuration
-@EnableWebSecurity
-public class SecurityConfiguration{
-    @Autowired
-    private UserRepository userRepository;
-
-    @Bean
-    SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-//        JwtAuthenticationConverter converter = new JwtAuthenticationConverter();
-//        converter.setJwtGrantedAuthoritiesConverter(source -> {
-//            Map<String, Object> resourceAccess = source.getClaim("realm_access");
-//            List<String> roles = (List<String>) resourceAccess.get("roles");
+//@Configuration
+//@EnableWebSecurity
+//public class SecurityConfiguration{
+//    @Autowired
+//    private UserRepository userRepository;
 //
-//            return roles.stream()
-//                    .map(SimpleGrantedAuthority::new)
-//                    .collect(Collectors.toList());
-//        });
-
-
-
-        httpSecurity
-                .authorizeHttpRequests(configurer -> configurer
-                        .requestMatchers("/issue/**").hasAuthority("admin")
-                        .requestMatchers("/reader/**").hasAuthority("reader")
-                        .requestMatchers("/book/**").authenticated()
-                        .requestMatchers("/ui/**").authenticated()
-                        .anyRequest().permitAll()
-                )
-                .formLogin(Customizer.withDefaults());
-//                .oauth2ResourceServer(configurer -> configurer
-//                        .jwt(jwtConfigurer -> jwtConfigurer
-//                                .jwtAuthenticationConverter(converter))
+//    @Bean
+//    SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+////        JwtAuthenticationConverter converter = new JwtAuthenticationConverter();
+////        converter.setJwtGrantedAuthoritiesConverter(source -> {
+////            Map<String, Object> resourceAccess = source.getClaim("realm_access");
+////            List<String> roles = (List<String>) resourceAccess.get("roles");
+////
+////            return roles.stream()
+////                    .map(SimpleGrantedAuthority::new)
+////                    .collect(Collectors.toList());
+////        });
 //
-        return httpSecurity.build();
-    }
-
-}
+//
+//
+//        httpSecurity
+//                .authorizeHttpRequests(configurer -> configurer
+//                        .requestMatchers("/issue/**").hasAuthority("admin")
+//                        .requestMatchers("/reader/**").hasAuthority("reader")
+//                        .requestMatchers("/book/**").authenticated()
+//                        .requestMatchers("/ui/**").authenticated()
+//                        .anyRequest().permitAll()
+//                )
+//                .formLogin(Customizer.withDefaults());
+////                .oauth2ResourceServer(configurer -> configurer
+////                        .jwt(jwtConfigurer -> jwtConfigurer
+////                                .jwtAuthenticationConverter(converter))
+////
+//        return httpSecurity.build();
+//    }
+//
+//}
